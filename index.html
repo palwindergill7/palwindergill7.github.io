@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palwinder Singh — Data Analyst · Power BI &amp; Applied ML</title>
+<meta name="description" content="Palwinder Singh — data analyst specializing in Power BI dashboards and geo-analytics, with applied machine learning work in computer vision and explainable AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#10141d;
+  --panel:#171d2a;
+  --panel-2:#1c2434;
+  --line:#2a3347;
+  --text:#e9ecf3;
+  --muted:#9aa4ba;
+  --amber:#f2c811;       /* Power BI gold */
+  --amber-dim:rgba(242,200,17,.14);
+  --teal:#5fd4c4;        /* ML accent, used sparingly */
+  --teal-dim:rgba(95,212,196,.12);
+  --radius:14px;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--amber);color:#10141d}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+/* ---------- nav ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(16,20,29,.82);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--display);font-weight:700;font-size:1.15rem;text-decoration:none;letter-spacing:.01em}
+.logo b{color:var(--amber)}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+.nav-links a{font-size:.92rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-links .gh{
+  color:var(--ink);background:var(--amber);font-weight:600;
+  padding:8px 16px;border-radius:99px;transition:transform .15s;
+}
+.nav-links .gh:hover{color:var(--ink);transform:translateY(-1px)}
+@media(max-width:680px){.nav-links li:not(:last-child){display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:84px 0 72px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.eyebrow{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:18px;
+}
+h1{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(2.6rem,5.4vw,4.1rem);
+  line-height:1.04;letter-spacing:-.015em;margin-bottom:22px;
+}
+h1 .thin{color:var(--muted);font-weight:400}
+.lede{color:var(--muted);font-size:1.08rem;max-width:46ch;margin-bottom:32px}
+.lede strong{color:var(--text);font-weight:600}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-block;text-decoration:none;font-weight:600;font-size:.95rem;
+  padding:12px 22px;border-radius:99px;transition:transform .15s,background .2s;
+}
+.btn-amber{background:var(--amber);color:var(--ink)}
+.btn-amber:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{background:var(--panel)}
+
+/* hero map */
+.map-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 26px 18px;position:relative;
+}
+.map-card svg{width:100%;height:auto}
+.map-cap{
+  margin-top:14px;font-family:var(--mono);font-size:.72rem;color:var(--muted);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.map-cap a{color:var(--amber);text-decoration:none}
+.map-cap a:hover{text-decoration:underline}
+.dot{fill:#3a4763}
+.dot.lit{fill:var(--amber)}
+.map-label{font-family:var(--mono);font-size:9.5px;fill:var(--amber)}
+.map-label-line{stroke:var(--amber);stroke-width:.7;opacity:.55}
+@media(max-width:880px){
+  .hero{grid-template-columns:1fr;padding-top:56px}
+  .map-card{max-width:480px}
+}
+
+/* ---------- sections ---------- */
+section{padding:84px 0}
+.sec-head{margin-bottom:44px}
+.sec-eyebrow{
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:10px;
+}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-.01em}
+
+/* focus grid — weighted by emphasis */
+.focus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px;transition:border-color .25s,transform .25s;
+}
+.card:hover{border-color:#3d4a66;transform:translateY(-3px)}
+.card h3{font-family:var(--display);font-weight:600;font-size:1.3rem;margin:14px 0 10px}
+.card p{color:var(--muted);font-size:.97rem}
+.card .num{
+  font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.1em;
+}
+.chip{
+  display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;
+  padding:4px 10px;border-radius:6px;margin:14px 8px 0 0;
+  background:var(--panel-2);border:1px solid var(--line);color:var(--muted);
+}
+.card-pbi{
+  grid-column:1 / -1;
+  background:linear-gradient(135deg,var(--panel) 55%,var(--amber-dim));
+  border-color:rgba(242,200,17,.35);
+  display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:center;
+}
+.card-pbi h3{font-size:1.55rem}
+.card-pbi .num{color:var(--amber)}
+.minibars{display:flex;align-items:flex-end;gap:8px;height:120px;padding:0 6px}
+.minibars span{
+  flex:1;background:var(--amber);border-radius:4px 4px 0 0;opacity:.85;
+  transform-origin:bottom;animation:grow .8s ease both;
+}
+.minibars span:nth-child(2n){opacity:.45}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.card-stats{
+  grid-column:1 / -1;
+  display:flex;gap:28px;align-items:center;
+  border-left:3px solid var(--amber);
+}
+.card-stats .num{color:var(--amber)}
+.card-stats > div{flex:1}
+.card-cv .num,.card-xai .num{color:var(--teal)}
+.card-cv,.card-xai{background:linear-gradient(160deg,var(--panel) 70%,var(--teal-dim))}
+@media(max-width:760px){
+  .focus-grid{grid-template-columns:1fr}
+  .card-pbi{grid-template-columns:1fr}
+  .minibars{height:90px}
+}
+
+/* projects */
+#projects{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.proj{
+  background:var(--ink);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px;display:flex;flex-direction:column;text-decoration:none;
+  transition:border-color .25s,transform .25s;
+}
+.proj:hover{border-color:var(--amber);transform:translateY(-4px)}
+.proj-tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+.proj-tag.ml{color:var(--teal)}
+.proj h3{font-family:var(--display);font-weight:600;font-size:1.18rem;margin-bottom:10px}
+.proj p{color:var(--muted);font-size:.93rem;flex:1}
+.proj .link{
+  margin-top:20px;font-family:var(--mono);font-size:.78rem;color:var(--text);
+}
+.proj:hover .link{color:var(--amber)}
+@media(max-width:880px){.proj-grid{grid-template-columns:1fr}}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
+.about-grid p{color:var(--muted);margin-bottom:18px}
+.about-grid p strong{color:var(--text)}
+.fact-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.fact-list li{
+  font-family:var(--mono);font-size:.84rem;color:var(--muted);
+  padding:14px 18px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+}
+.fact-list b{color:var(--text);font-weight:500}
+@media(max-width:760px){.about-grid{grid-template-columns:1fr}}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:48px 0 64px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.foot .mono{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.foot a{color:var(--amber);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">Palwinder<b>&nbsp;Singh</b></a>
+    <ul class="nav-links">
+      <li><a href="#focus">Focus</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a class="gh" href="https://github.com/palwindergill7" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">Data Analyst · Power BI &amp; Applied ML</p>
+      <h1>Dashboards people trust.<br><span class="thin">Models that explain themselves.</span></h1>
+      <p class="lede">I'm <strong>Palwinder Singh</strong>. I build interactive <strong>Power BI</strong> dashboards and geo-analytics on a foundation of solid statistics — and apply machine learning where it earns its keep: computer vision and explainable AI.</p>
+      <div class="hero-cta">
+        <a class="btn btn-amber" href="#projects">View projects</a>
+        <a class="btn btn-ghost" href="#focus">What I do</a>
+      </div>
+    </div>
+
+    <figure class="map-card reveal">
+      <svg id="deMap" viewBox="0 0 240 310" role="img" aria-label="Dot map of Germany highlighting clusters of city-name suffixes such as -ingen, -heim, -burg and -ow"></svg>
+      <figcaption class="map-cap">
+        <span>fig. 01 — Städtenamenmuster Deutschland</span>
+        <span><a href="https://github.com/palwindergill7/PowerBI/tree/main/St%C3%A4dtenamenmuster%20Deutschland" target="_blank" rel="noopener">view in Power BI repo ↗</a></span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- ============ FOCUS ============ -->
+  <section id="focus">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="sec-eyebrow">Focus areas</p>
+        <h2>Four disciplines, one through-line: clarity.</h2>
+      </div>
+
+      <div class="focus-grid">
+        <article class="card card-pbi reveal">
+          <div>
+            <span class="num">01 · PRIMARY</span>
+            <h3>Power BI</h3>
+            <p>Interactive dashboards and geo-analytics: data modeling, DAX measures, map visuals and drill-through reports that turn raw tables into questions people can answer themselves. From sales overviews to mapping how German place names cluster across the country.</p>
+            <span class="chip">DAX</span><span class="chip">Data modeling</span><span class="chip">Geo-analytics</span><span class="chip">Power Query</span>
+          </div>
+          <div class="minibars" aria-hidden="true">
+            <span style="height:38%"></span><span style="height:62%"></span><span style="height:50%"></span><span style="height:85%"></span><span style="height:70%"></span><span style="height:100%"></span><span style="height:58%"></span>
+          </div>
+        </article>
+
+        <article class="card card-stats reveal">
+          <div>
+            <span class="num">02 · THE FOUNDATION</span>
+            <h3>Statistics</h3>
+            <p>Every dashboard above stands on this layer. Distributions, hypothesis testing and regression — the analytical groundwork that decides whether a chart says something true before it says something pretty. Numbers get checked before they get visualized.</p>
+            <span class="chip">Hypothesis testing</span><span class="chip">Regression</span><span class="chip">EDA</span>
+          </div>
+        </article>
+
+        <article class="card card-cv reveal">
+          <span class="num">03 · APPLIED ML</span>
+          <h3>Computer Vision</h3>
+          <p>Image embeddings, semantic image search and visual recognition — built with PyTorch and Hugging Face models, served through lightweight Streamlit and Gradio apps that run locally.</p>
+          <span class="chip">PyTorch</span><span class="chip">Hugging Face</span><span class="chip">Embeddings</span>
+        </article>
+
+        <article class="card card-xai reveal">
+          <span class="num">04 · APPLIED ML</span>
+          <h3>Explainable AI</h3>
+          <p>Models that surface <em>why</em> they produce a result. Transparency and interpretability aren't an afterthought — they're what make a prediction usable, auditable and trusted.</p>
+          <span class="chip">Interpretability</span><span class="chip">Attribution</span><span class="chip">Trust</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="sec-eyebrow">Selected work</p>
+        <h2>Projects on GitHub</h2>
+      </div>
+
+      <div class="proj-grid">
+        <a class="proj reveal" href="https://github.com/palwindergill7/PowerBI/tree/main/St%C3%A4dtenamenmuster%20Deutschland" target="_blank" rel="noopener">
+          <span class="proj-tag">Power BI · Geo-analytics</span>
+          <h3>Städtenamenmuster Deutschland</h3>
+          <p>An interactive Power BI report mapping the geography of German city-name patterns — where suffixes like ‑ingen, ‑heim, ‑burg and ‑ow cluster, and what those clusters reveal about settlement history.</p>
+          <span class="link">github.com/palwindergill7/PowerBI →</span>
+        </a>
+
+        <a class="proj reveal" href="https://github.com/palwindergill7/Explainable-Image-Search-Engine" target="_blank" rel="noopener">
+          <span class="proj-tag ml">Computer Vision · XAI</span>
+          <h3>Explainable Image Search Engine</h3>
+          <p>Semantic image search over precomputed embeddings, served as a Streamlit app. Search by meaning, not metadata — and see why each result matched. Built with PyTorch and Hugging Face models.</p>
+          <span class="link">github.com/…/Explainable-Image-Search-Engine →</span>
+        </a>
+
+        <a class="proj reveal" href="https://github.com/palwindergill7/SpeechScribe-Edge" target="_blank" rel="noopener">
+          <span class="proj-tag ml">Speech · Edge ML</span>
+          <h3>SpeechScribe Edge</h3>
+          <p>Local audio transcription with Whisper — file-based or real-time from the mic — with NLLB-200 translation into 14 languages and export to PDF, DOCX, TXT and SRT. Runs entirely on your own machine.</p>
+          <span class="link">github.com/…/SpeechScribe-Edge →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <div class="sec-head" style="margin-bottom:24px">
+          <p class="sec-eyebrow">About</p>
+          <h2>Analysis first, then the model.</h2>
+        </div>
+        <p>I work at the intersection of business intelligence and applied machine learning. The Power BI side of my work is about giving people <strong>self-serve answers</strong> — dashboards where the next question is one click away. The statistics underneath make sure those answers hold up.</p>
+        <p>On the ML side I'm drawn to systems you can <strong>inspect</strong>: image search that shows its reasoning, transcription that runs on the edge instead of a black-box API. If a model can't explain itself, it hasn't finished its job.</p>
+        <p>The fastest way to reach me or see what I'm building is <a href="https://github.com/palwindergill7" target="_blank" rel="noopener" style="color:var(--amber)">GitHub</a>.</p>
+      </div>
+      <ul class="fact-list reveal">
+        <li><b>Location</b> — Germany</li>
+        <li><b>BI stack</b> — Power BI · DAX · Power Query</li>
+        <li><b>ML stack</b> — Python · PyTorch · Hugging Face</li>
+        <li><b>Apps</b> — Streamlit · Gradio</li>
+        <li><b>GitHub</b> — @palwindergill7</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="mono">© <span id="yr"></span> Palwinder Singh</span>
+    <span class="mono"><a href="https://github.com/palwindergill7/palwindergill7.github.io" target="_blank" rel="noopener">palwindergill7.github.io ↗</a></span>
+  </div>
+</footer>
+
+<script>
+/* ---------- Germany dot map (signature element) ----------
+   A simplified border polygon (lon/lat). Grid points inside it
+   become dots; a few real cities are highlighted with their
+   name-suffix labels — a nod to the Städtenamenmuster report. */
+(function(){
+  const border = [
+    [8.6,54.92],[9.45,54.83],[10.0,54.5],[10.9,54.05],[11.4,54.0],[12.5,54.45],
+    [13.05,54.4],[13.8,54.12],[14.22,53.9],[14.12,52.85],[14.62,52.6],[14.55,51.85],
+    [15.0,51.3],[14.8,50.9],[14.3,51.05],[13.0,50.5],[12.3,50.25],[12.5,49.95],
+    [12.4,49.7],[13.8,48.75],[13.4,48.4],[12.8,48.12],[13.0,47.8],[12.2,47.7],
+    [11.0,47.42],[10.45,47.4],[10.18,47.28],[9.6,47.55],[8.6,47.68],[7.6,47.58],
+    [7.55,48.5],[8.2,48.95],[6.45,49.5],[6.1,50.1],[6.0,50.8],[5.95,51.05],
+    [6.2,51.5],[6.05,51.85],[6.8,52.2],[7.05,52.4],[6.7,52.62],[7.0,53.3],
+    [7.2,53.68],[8.05,53.65],[8.5,53.9],[8.85,54.0]
+  ];
+  // point-in-polygon (ray casting)
+  function inside(lon,lat){
+    let ok=false;
+    for(let i=0,j=border.length-1;i<border.length;j=i++){
+      const [xi,yi]=border[i],[xj,yj]=border[j];
+      if(((yi>lat)!==(yj>lat)) && (lon < (xj-xi)*(lat-yi)/(yj-yi)+xi)) ok=!ok;
+    }
+    return ok;
+  }
+  // projection scaled to the 240×310 viewBox; lon compressed by cos(51°)
+  const KY=33, KX=20.8;
+  function P(lon,lat){ return [ (lon-5.6)*KX + 12, (55.2-lat)*KY + 14 ]; }
+
+  const svg=document.getElementById('deMap');
+  const NS='http://www.w3.org/2000/svg';
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // grid of dots
+  let delay=0;
+  for(let lat=47.3; lat<=55.0; lat+=0.185){
+    for(let lon=5.9; lon<=15.05; lon+=0.29){
+      if(!inside(lon,lat)) continue;
+      const [x,y]=P(lon,lat);
+      const c=document.createElementNS(NS,'circle');
+      c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1));
+      c.setAttribute('r','1.9'); c.setAttribute('class','dot');
+      if(!reduce){
+        c.style.opacity='0';
+        c.style.transition='opacity .5s ease '+(delay*0.9)+'ms';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>c.style.opacity='1'));
+        delay++;
+      }
+      svg.appendChild(c);
+    }
+  }
+
+  // highlighted suffix clusters (real coordinates)
+  const marks=[
+    {lon:9.05, lat:48.52, label:'-ingen', dx:-46, dy:18},   // Tübingen / SW cluster
+    {lon:8.46, lat:49.49, label:'-heim',  dx:-42, dy:-10},  // Mannheim
+    {lon:10.0, lat:53.55, label:'-burg',  dx:18,  dy:-12},  // Hamburg
+    {lon:13.27,lat:52.40, label:'-ow',    dx:20,  dy:6}     // Teltow / NE cluster
+  ];
+  marks.forEach(m=>{
+    const [x,y]=P(m.lon,m.lat);
+    const g=document.createElementNS(NS,'g');
+    const c=document.createElementNS(NS,'circle');
+    c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r','4');
+    c.setAttribute('class','dot lit');
+    const l=document.createElementNS(NS,'line');
+    l.setAttribute('x1',x);l.setAttribute('y1',y);
+    l.setAttribute('x2',x+m.dx*0.7);l.setAttribute('y2',y+m.dy);
+    l.setAttribute('class','map-label-line');
+    const t=document.createElementNS(NS,'text');
+    t.setAttribute('x',x+m.dx*0.7+(m.dx<0?-3:3));
+    t.setAttribute('y',y+m.dy+3);
+    t.setAttribute('text-anchor',m.dx<0?'end':'start');
+    t.setAttribute('class','map-label');
+    t.textContent=m.label;
+    g.append(l,c,t); svg.appendChild(g);
+  });
+})();
+
+/* ---------- scroll reveal ---------- */
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+  },{threshold:.12});
+  els.forEach(e=>io.observe(e));
+})();
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
